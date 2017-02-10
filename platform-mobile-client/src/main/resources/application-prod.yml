@@ -1,0 +1,38 @@
+spring:
+  redis:
+    database: 1
+    host: 127.0.0.1
+    port: 6379
+    timeout: 0
+    pool:
+      max-active: 300 #\u6700\u5927\u8FDE\u63A5\u6570
+      max-idle: 100 #\u6700\u5927\u7A7A\u95F2\u8FDE\u63A5\u6570
+      max-wait: -1 #\u6700\u5927\u7B49\u5F85\u65F6\u95F4
+      min-idle: 0 #\u521D\u59CB\u5316\u8FDE\u63A5\u6570
+  http:
+    multipart:
+      enabled: true # Enable support of multi-part uploads.
+      file-size-threshold: 4KB # Threshold after which files will be written to disk. Values can use the suffixed "MB" or "KB" to indicate a Megabyte or Kilobyte size.
+      location: /tmp # Intermediate location of uploaded files.
+      max-file-size: 5Mb # Max file size. Values can use the suffixed "MB" or "KB" to indicate a Megabyte or Kilobyte size.
+      max-request-size: 50Mb # Max request size. Values can use the suffixed "MB" or "KB" to indicate a Megabyte or Kilobyte size.
+
+server:
+  port: 8081
+  tomcat:
+    remote-ip-header: x-forwarded-for
+    protocol-header: x-forwarded-proto
+    port-header: X-Forwarded-Port
+    accesslog:
+      debug: true #请求响应数据调试
+  use-forward-headers: true
+
+security:
+  jwt:
+    secret: k09BQnaF
+    expiration: 1728000 #20Days
+
+upload:
+  #Disk upload
+  work-folder-name: /Users/zhangxd/files #文件存储路径
+  access-url: http://127.0.0.1:8090 #文件访问地址，可使用反向代理

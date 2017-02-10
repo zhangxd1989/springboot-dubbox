@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>platform-parent</artifactId>
+        <groupId>cn.zhangxd</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>platform-mobile-client</artifactId>
+
+    <properties>
+        <start-class>cn.zhangxd.platform.mobile.client.ClientMobileApplication</start-class>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <profileActive>local</profileActive>
+
+                <!-- dubbo -->
+                <dubbo.container>logback,spring</dubbo.container>
+                <dubbo.shutdown.hook>true</dubbo.shutdown.hook>
+                <dubbo.application.name>platform-mobile-client</dubbo.application.name>
+                <dubbo.application.owner>zhangxudong</dubbo.application.owner>
+                <dubbo.registry.protocol>zookeeper</dubbo.registry.protocol>
+                <dubbo.registry.address>127.0.0.1:2181</dubbo.registry.address>
+                <dubbo.registry.client>curator</dubbo.registry.client>
+                <dubbo.registry.file>tmp/client_mobile.cache</dubbo.registry.file>
+                <dubbo.application.logger>slf4j</dubbo.application.logger>
+                <dubbo.logback.level>info</dubbo.logback.level>
+                <dubbo.monitor.protocol> </dubbo.monitor.protocol>
+
+                <access.log.appender>STDOUT</access.log.appender>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profileActive>dev</profileActive>
+
+                <!-- dubbo -->
+                <dubbo.container>logback,spring</dubbo.container>
+                <dubbo.shutdown.hook>true</dubbo.shutdown.hook>
+                <dubbo.application.name>platform-mobile-client</dubbo.application.name>
+                <dubbo.application.owner>zhangxudong</dubbo.application.owner>
+                <dubbo.registry.protocol>zookeeper</dubbo.registry.protocol>
+                <dubbo.registry.address>127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183</dubbo.registry.address>
+                <dubbo.registry.client>curator</dubbo.registry.client>
+                <dubbo.registry.file>/data/zookeeper/client_mobile.cache</dubbo.registry.file>
+                <dubbo.application.logger>slf4j</dubbo.application.logger>
+                <dubbo.logback.level>error</dubbo.logback.level>
+                <dubbo.monitor.protocol>registry</dubbo.monitor.protocol>
+
+                <access.log.appender>FILE</access.log.appender>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profileActive>prod</profileActive>
+
+                <!-- dubbo -->
+                <dubbo.container>logback,spring</dubbo.container>
+                <dubbo.shutdown.hook>true</dubbo.shutdown.hook>
+                <dubbo.application.name>platform-mobile-client</dubbo.application.name>
+                <dubbo.application.owner>zhangxudong</dubbo.application.owner>
+                <dubbo.registry.protocol>zookeeper</dubbo.registry.protocol>
+                <dubbo.registry.address>127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183</dubbo.registry.address>
+                <dubbo.registry.client>curator</dubbo.registry.client>
+                <dubbo.registry.file>/data/zookeeper/client_mobile.cache</dubbo.registry.file>
+                <dubbo.application.logger>slf4j</dubbo.application.logger>
+                <dubbo.logback.level>error</dubbo.logback.level>
+                <dubbo.monitor.protocol>registry</dubbo.monitor.protocol>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.zhangxd</groupId>
+            <artifactId>platform-common-web</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Swagger -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>platform-mobile-client</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

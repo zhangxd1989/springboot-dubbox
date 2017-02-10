@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- dubbo注解扫描包名 -->
+    <!--<dubbo:annotation package="cn.zhangxd.platform.system.provider"/>-->
+
+    <dubbo:protocol name="dubbo"/>
+
+    <!-- 声明需要暴露的服务接口 -->
+    <dubbo:service interface="cn.zhangxd.platform.system.api.service.ISystemService"
+                   ref="systemService" protocol="dubbo" timeout="5000"/>
+
+    <dubbo:service interface="cn.zhangxd.platform.system.api.service.ITripUserService"
+                   ref="tripUserService" protocol="dubbo" timeout="5000"/>
+
+    <dubbo:service interface="cn.zhangxd.platform.system.api.service.ICaptchaService"
+                   ref="captchaService" protocol="dubbo" timeout="5000"/>
+
+    <dubbo:service interface="cn.zhangxd.platform.system.api.service.ICurrencyRateService"
+                   ref="currencyRateService" protocol="dubbo" timeout="5000"/>
+
+</beans>

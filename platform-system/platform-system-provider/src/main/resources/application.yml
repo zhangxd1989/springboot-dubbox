@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: Platform Service Provider
+  profiles:
+    active: @profileActive@
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mybatis/*.xml

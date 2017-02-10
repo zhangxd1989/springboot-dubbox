@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zhangxd.platform.system.provider.mapper.SysUserMapper">
+
+    <sql id="selectColumns">
+        SELECT
+            a.id,
+            a.login_name,
+            a.password,
+            a.name,
+            a.email,
+            a.phone,
+            a.mobile,
+            a.enabled,
+            a.remarks,
+            a.create_date,
+            a.update_date
+        FROM sys_user a
+    </sql>
+
+    <!-- 根据编号获得用户 -->
+    <select id="get" resultType="cn.zhangxd.platform.system.api.entity.SysUser">
+        <include refid="selectColumns"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <!-- 根据登录名查询用户 -->
+    <select id="getByLoginName" resultType="cn.zhangxd.platform.system.api.entity.SysUser">
+        <include refid="selectColumns"/>
+        WHERE a.login_name = #{loginName}
+    </select>
+
+    <!-- 分页查询用户信息 -->
+    <select id="findList" resultType="cn.zhangxd.platform.system.api.entity.SysUser">
+        <include refid="selectColumns"/>
+        WHERE a.del_flag = '0'
+        <if test="loginName != null and loginName != ''">
+            AND a.login_name like CONCAT('%', #{loginName}, '%')
+        </if>
+        <if test="name != null and name != ''">
+            AND a.name like CONCAT('%', #{name}, '%')
+        </if>
+        ORDER BY a.create_date
+    </select>
+
+    <!-- 查询全部用户 -->
+    <select id="findAllList" resultType="cn.zhangxd.platform.system.api.entity.SysUser">
+        <include refid="selectColumns"/>
+        WHERE a.del_flag = '0'
+        ORDER BY a.create_date
+    </select>
+
+    <!-- 插入用户 -->
+    <insert id="insert">
+        INSERT INTO sys_user (
+            id,
+            login_name,
+            password,
+            name,
+            email,
+            phone,
+            mobile,
+            enabled,
+            create_date,
+            update_date,
+            remarks
+        ) VALUES (
+            #{id},
+            #{loginName},
+            #{password},
+            #{name},
+            #{email},
+            #{phone},
+            #{mobile},
+            #{enabled},
+            #{createDate},
+            #{updateDate},
+            #{remarks}
+        )
+    </insert>
+
+    <!-- 更新用户 -->
+    <update id="update">
+        UPDATE sys_user
+        <set>
+            login_name = #{loginName},
+            <if test="password != null and password != '' ">
+                password = #{password},
+            </if>
+            name = #{name},
+            email = #{email},
+            phone = #{phone},
+            mobile = #{mobile},
+            enabled = #{enabled},
+            update_date = #{updateDate},
+            remarks = #{remarks}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 保存用户信息 -->
+    <update id="updateInfo">
+        UPDATE sys_user
+        <set>
+            name = #{name},
+            email = #{email},
+            phone = #{phone},
+            mobile = #{mobile},
+            update_date = #{updateDate},
+            remarks = #{remarks}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 更新用户密码 -->
+    <update id="updatePasswordById">
+        UPDATE sys_user
+        SET
+            password = #{password}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除用户 -->
+    <update id="deleteById">
+        UPDATE sys_user
+        SET del_flag = '1'
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除用户和角色关联表数据 -->
+    <delete id="deleteUserRole">
+        DELETE FROM sys_user_role
+        WHERE user_id = #{id}
+    </delete>
+
+    <!-- 插入用户和角色关联表数据 -->
+    <insert id="insertUserRole">
+        INSERT INTO sys_user_role(user_id, role_id)
+        <foreach collection="roles" item="role" separator=" union all ">
+            SELECT #{id}, #{role.id} FROM dual
+        </foreach>
+    </insert>
+
+</mapper>

@@ -1,0 +1,35 @@
+spring:
+  redis:
+    database: 0
+    host: 127.0.0.1
+    #password: # Login password of the redis server.
+    port: 6379
+    timeout: 0
+    pool:
+      max-active: 8 #最大连接数
+      max-idle: 8 #最大空闲连接数
+      max-wait: -1 #最大等待时间
+      min-idle: 0 #初始化连接数
+  http:
+    multipart:
+      enabled: true # Enable support of multi-part uploads.
+      file-size-threshold: 4KB # Threshold after which files will be written to disk. Values can use the suffixed "MB" or "KB" to indicate a Megabyte or Kilobyte size.
+      location: /tmp # Intermediate location of uploaded files.
+      max-file-size: 5Mb # Max file size. Values can use the suffixed "MB" or "KB" to indicate a Megabyte or Kilobyte size.
+      max-request-size: 50Mb # Max request size. Values can use the suffixed "MB" or "KB" to indicate a Megabyte or Kilobyte size.
+
+server:
+  port: 8080
+  tomcat:
+    accesslog:
+      debug: true #请求响应数据调试
+
+security:
+  jwt:
+    secret: k09BQnaF
+    expiration: 604800 #7Days
+
+upload:
+  #Disk upload
+  work-folder-name: /Users/zhangxd/files #文件存储路径
+  access-url: http://127.0.0.1:8090 #文件访问地址，可使用反向代理

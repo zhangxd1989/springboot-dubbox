@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zhangxd.platform.system.provider.mapper.TripUserMapper">
+
+    <sql id="selectColumns">
+        SELECT
+            a.`id`,
+            a.`mobile`,
+            a.`password`,
+            a.`nickname`,
+            a.`gender`,
+            a.`age`,
+            a.`photo`,
+            a.`create_date`,
+            a.`update_date`,
+            a.`enabled`,
+            a.`remarks`
+        FROM trip_user a
+    </sql>
+
+    <select id="getByMobile" resultType="cn.zhangxd.platform.system.api.entity.TripUser">
+        <include refid="selectColumns"/>
+        WHERE a.`mobile` = #{mobile}
+    </select>
+
+    <select id="get" resultType="cn.zhangxd.platform.system.api.entity.TripUser">
+        <include refid="selectColumns"/>
+        WHERE a.`id` = #{id}
+    </select>
+
+    <select id="queryList" resultType="cn.zhangxd.platform.system.api.entity.TripUser">
+        <include refid="selectColumns"/>
+        WHERE a.del_flag = '0'
+        <if test="gender != null and gender != ''">
+            AND `gender` = #{gender}
+        </if>
+        <if test="beginTime != null">
+            AND `create_date` >= #{beginTime}
+        </if>
+        <if test="endTime != null">
+            <![CDATA[ AND `create_date` <= #{endTime} ]]>
+        </if>
+        <if test="beginTime != null and endTime != null">
+            AND `create_date` BETWEEN #{beginTime} AND #{endTime}
+        </if>
+        <if test="search != null and search != ''">
+            AND (
+            `mobile` LIKE CONCAT('%', #{search}, '%')
+            OR
+            `nickname` LIKE CONCAT('%', #{search}, '%')
+            )
+        </if>
+        ORDER BY `create_date` DESC
+    </select>
+
+    <!-- 插入用户 -->
+    <insert id="insert">
+        INSERT INTO trip_user (
+            `id`,
+            `mobile`,
+            `password`,
+            `nickname`,
+            `gender`,
+            `age`,
+            `photo`,
+            `enabled`,
+            `remarks`,
+            `create_date`,
+            `update_date`
+        ) VALUES (
+            #{id},
+            #{mobile},
+            #{password},
+            #{nickname},
+            #{gender},
+            #{age},
+            #{photo},
+            #{enabled},
+            #{remarks},
+            #{createDate},
+            #{updateDate}
+        )
+    </insert>
+
+    <!-- 修改用户 -->
+    <update id="updateInfo">
+        UPDATE trip_user
+        <set>
+            `nickname` = #{nickname},
+            `gender` = #{gender},
+            `age` = #{age},
+            `update_date` = #{updateDate}
+        </set>
+        WHERE `id` = #{id}
+    </update>
+
+    <!-- 更新用户密码 -->
+    <update id="updatePasswordByMobile">
+        UPDATE trip_user
+        SET
+            `password` = #{password}
+        WHERE `mobile` = #{mobile}
+    </update>
+
+    <!-- 更新头像 -->
+    <update id="updatePhotoByUser">
+        UPDATE trip_user
+        SET
+            `photo` = #{photo}
+        WHERE `id` = #{userId}
+    </update>
+</mapper>
