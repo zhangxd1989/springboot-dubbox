@@ -1,5 +1,2 @@
-# platform
-
-mvn versions:set -DnewVersion=1.0.1-SNAPSHOT
-或
-mvn -N versions:update-child-modules
+# springboot-dubbox
+基于spring-boot dubbox搭建的java分布式系统
