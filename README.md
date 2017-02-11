@@ -14,3 +14,8 @@
 - 多profile管理
 - maven项目管理
 - Mybatis多数据源
+- logback记录日志
+- 客户端用户注册、登录、修改信息、上传头像、忘记密码接口
+- 接口访问次数限制
+- okhttp3第三方接口调用
+- druid sql监控
