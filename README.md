@@ -1,6 +1,5 @@
 # springboot-dubbox
 基于spring-boot dubbox搭建的java分布式系统
-
 - 前后端分离
 - 前端管理项目 https://github.com/zhangxd1989/springboot-dubbox-web
 - spring-security基于角色的权限管理
