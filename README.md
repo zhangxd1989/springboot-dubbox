@@ -18,3 +18,14 @@
 - 接口访问次数限制
 - okhttp3第三方接口调用
 - druid sql监控
+
+---
+
+- 项目依赖Mysql、Zookeeper、Redis
+- platform-admin-web为管理平台接口
+- platform-mobile-client为移动客户端接口
+- platform-system为服务提供者
+- 在application.yml中配置数据库连接、Redis连接及web访问端口
+- 执行db-script中的数据库初始化脚本
+- 在pom.xml中配置zookeeper连接地址
+- 启动SysProviderApplication后分别启动ClientMobileApplication和WebAdminApplication
