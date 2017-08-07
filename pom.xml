@@ -29,7 +29,7 @@
         <repository>
             <id>nexus</id>
             <name>nexus</name>
-            <url>http://114.215.66.254:8081/repository/maven-public/</url>
+            <url>http://47.92.158.230:8081/repository/maven-public/</url>
         </repository>
     </repositories>
 
@@ -37,7 +37,7 @@
         <pluginRepository>
             <id>nexus</id>
             <name>nexus</name>
-            <url>http://114.215.66.254:8081/repository/maven-public/</url>
+            <url>http://47.92.158.230:8081/repository/maven-public/</url>
         </pluginRepository>
     </pluginRepositories>
 
@@ -231,11 +231,11 @@
     <distributionManagement>
         <repository>
             <id>maven-releases</id>
-            <url>http://114.215.66.254:8081/repository/maven-releases/</url>
+            <url>http://47.92.158.230:8081/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>maven-snapshots</id>
-            <url>http://114.215.66.254:8081/repository/maven-snapshots/</url>
+            <url>http://47.92.158.230:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
