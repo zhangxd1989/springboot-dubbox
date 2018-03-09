@@ -35,7 +35,7 @@
                 <dubbo.monitor.protocol> </dubbo.monitor.protocol>
 
                 <access.log.appender>STDOUT</access.log.appender>
-            </properties>
+            </properties>ssss
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
