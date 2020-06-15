@@ -57,7 +57,7 @@
         <springfox.version>2.5.0</springfox.version>
         <fastjson.version>1.2.10</fastjson.version>
         <okhttp.version>3.4.1</okhttp.version>
-        <validator.version>5.2.4.Final</validator.version>
+        <validator.version>5.3.5.Final</validator.version>
         <ehcache-core.version>2.6.11</ehcache-core.version>
         <zxing.version>3.2.0</zxing.version>
         <mybatis-starter.version>1.1.1</mybatis-starter.version>
